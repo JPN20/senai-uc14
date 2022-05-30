@@ -18,7 +18,7 @@ namespace ExoAPI.Contexts
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=192.168.1.250;Database=ExoProjetos;User Id=van;Password=tredfg;");
+                optionsBuilder.UseSqlServer("Server=192.168.1.250;Database=ExoProjetos;User Id=van;Password=******;");
             }
         }
 
