@@ -40,6 +40,7 @@ namespace ExoAPI.Repositories
 
 		public Usuario Cadastrar(Usuario usuario)
         {
+			usuario.Perfil = Enumeradores.PerfilUsuario.Usuario;
 			usuario.Senha = new Password().Hash(usuario.Senha);
 
 			_context.Usuarios.Add(usuario);

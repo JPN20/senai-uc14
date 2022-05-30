@@ -21,7 +21,11 @@ namespace ExoAPI.Controllers
         {
             _repository = repository;
         }
-        
+
+        /// <summary>
+        /// Lista todos os projetos cadastrados; requer autenticação
+        /// </summary>
+        /// <returns>Lista de projetos</returns>
         [HttpGet]
         public IActionResult Listar()
         {
@@ -34,7 +38,12 @@ namespace ExoAPI.Controllers
                 throw ex;
             }
         }
-        
+
+        /// <summary>
+        /// Busca por um projeto específico pelo seu id; requer autenticação
+        /// </summary>
+        /// <param name="id">Id do projeto a ser localizado</param>
+        /// <returns>Lista de projetos</returns>
         [HttpGet("{id}")]
         public IActionResult BuscarPorId(int id)
         {
@@ -50,7 +59,12 @@ namespace ExoAPI.Controllers
                 throw ex;
             }
         }
-        
+
+        /// <summary>
+        /// Insere um novo projeto na base de dados; requer autenticação
+        /// </summary>
+        /// <param name="projeto">Objeto que contém os dados a serem cadastrados</param>
+        /// <returns>Objeto com o id atualizado após ser salvo no banco</returns>
         [HttpPost]
         public IActionResult Cadastrar([FromBody]Projeto projeto)
         {
@@ -63,7 +77,13 @@ namespace ExoAPI.Controllers
                 throw ex;
             }
         }
-                
+
+        /// <summary>
+        /// Atualiza os dados de um determinado projeto; requer autenticação
+        /// </summary>
+        /// <param name="id">Id do projeto a ser atualizado</param>
+        /// <param name="projeto">Objeto que contém os dados serem atualizados</param>
+        /// <returns>Objeto atualizado</returns>
         [HttpPut("{id}")]
         public IActionResult Atualizar(int id, [FromBody]Projeto projeto)
         {
@@ -76,7 +96,12 @@ namespace ExoAPI.Controllers
                 throw ex;
             }
         }
-        
+
+        /// <summary>
+        /// Exclui um determinado projeto; requer autenticação
+        /// </summary>
+        /// <param name="id">Id do projeto a ser excluído</param>
+        /// <returns>True se a exclusão foi feita com sucesso, false caso contrário</returns>
         [HttpDelete("{id}")]
         public IActionResult Excluir(int id)
         {

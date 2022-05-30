@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Reflection;
+using System.Text;
 using ExoAPI.Contexts;
 using ExoAPI.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -46,7 +47,13 @@ builder.Services.AddTransient<ProjetoRepository, ProjetoRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    var file = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var path = Path.Combine(AppContext.BaseDirectory, file);
+
+    options.IncludeXmlComments(path);
+});
 
 var app = builder.Build();
 

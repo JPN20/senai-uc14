@@ -21,7 +21,12 @@ namespace ExoAPI.Controllers
         {
             _repository = repository;
         }
-        
+
+        /// <summary>
+        /// Permite ao usuário efetuar login no site
+        /// </summary>
+        /// <param name="usuario">Objeto que contém o e-mail e a senha para se logar</param>
+        /// <returns>Token a ser usado nas próximas chamadas para autenticação</returns>
         [HttpPost]
         public IActionResult EfetuarLogin([FromBody]Usuario usuario)
         {
