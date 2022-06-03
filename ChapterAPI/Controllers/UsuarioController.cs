@@ -12,17 +12,17 @@ namespace ChapterAPI.Controllers
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
-    public class LivroController : Controller
+    public class UsuarioController : Controller
     {
-        private readonly LivroRepository _repository;
+        private readonly UsuarioRepository _repository;
 
-        public LivroController(LivroRepository repository)
+        public UsuarioController(UsuarioRepository repository)
         {
             _repository = repository;
         }
         
         [HttpGet]
+        [Authorize]
         public IActionResult Listar()
         {
             try
@@ -36,18 +36,19 @@ namespace ChapterAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public IActionResult BuscarPorId(int id)
         {
             try
             {
-                var livro = _repository.BuscarPorId(id);
+                var usuario = _repository.BuscarPorId(id);
 
-                if (livro == null)
+                if (usuario == null)
                 {
                     return NotFound();
                 }
 
-                return Ok(livro);
+                return Ok(usuario);
             }
             catch
             {
@@ -56,11 +57,11 @@ namespace ChapterAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Cadastrar([FromBody]Livro livro)
+        public IActionResult Cadastrar([FromBody] Usuario usuario)
         {
             try
             {
-                _repository.Cadastrar(livro);
+                _repository.Cadastrar(usuario);
                 return StatusCode(201);
             }
             catch
@@ -70,11 +71,12 @@ namespace ChapterAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Atualizar(int id, [FromBody]Livro livro)
+        [Authorize]
+        public IActionResult Atualizar(int id, [FromBody] Usuario usuario)
         {
             try
             {
-                _repository.Atualizar(id, livro);
+                _repository.Atualizar(id, usuario);
                 return StatusCode(202);
             }
             catch
@@ -84,6 +86,7 @@ namespace ChapterAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrador")]
         public IActionResult Excluir(int id)
         {
             try

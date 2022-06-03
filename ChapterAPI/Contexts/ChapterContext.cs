@@ -18,11 +18,13 @@ namespace ChapterAPI.Contexts
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=192.168.1.250;Database=Chapter;User Id=van;Password=******;");
+                optionsBuilder.UseSqlServer("Server=192.168.1.250;Database=Chapter;User Id=van;Password=tredfg;");
             }
         }
 
         public DbSet<Livro> Livros { get; set; }
+
+        public DbSet<Usuario> Usuarios { get; set; }
     }
 }
 
